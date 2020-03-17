@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# COnfiguration env vars  (Psw & API keys)
+.env
