@@ -1,0 +1,22 @@
+# Container for Visiting Cities App 
+# Marzo  2020
+
+FROM node:13-alpine
+LABEL maintainer="roberto.vicuna@gmail.com"
+
+WORKDIR /usr/app
+
+COPY package*.json ./
+
+# RUN apk --no-cache add --virtual builds-deps build-base python
+
+# RUN npm install
+
+#RUN npm install -g create-react-app
+
+# RUN npm rebuild bcrypt --build-from-source .
+
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]

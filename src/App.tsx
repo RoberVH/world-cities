@@ -1,50 +1,82 @@
+/* eslint-disable no-sequences */
 import React, {useState} from 'react';
 import './App.css';
-import axios from 'axios';
-import ciudades from './data/city.list.json';
+import axios, { AxiosResponse } from 'axios';
+import {REACT_APP_OPENWEATHERMAP_APIKEY} from './config/globals';
+//import  {coordenadas, clima, principal, viento, sistema} from  './config/types';
+import { ClimaCiudad, clima } from './config/types';
+import { promises } from 'dns';
 
 
-// 
-
-//declare function buscar_ciudadesxpais(ciudades:String[]):String[];
-
-interface Ciudad  {
-     id: number;
-    name: string;
-    state: string;
-    country: string;
-    coord: {
-      lon: number;
-      lat: number
-    }  
-}
-
-const [reporteClima,setReporte]=useState({});
+const APIURL= 'http://api.openweathermap.org/data/2.5/weather/';
+//&units=metric&lang=es
+//const getAXIOSCiudades = (param: string) => axios.get(`${APIURL}?q=${param}&units=metric&lang=es&appid=${REACT_APP_OPENWEATHERMAP_APIKEY}`);
+const getAXIOSCiudades:(ciudad: string) => Promise<AxiosResponse<any>> = (ciudad) => axios.get(
+         `${APIURL}?q=${ciudad}&units=metric&lang=es&appid=${REACT_APP_OPENWEATHERMAP_APIKEY}`);
 
 
-// const asigna_ciudades=(lista:Ciudad[]):Ciudad[] => {
-//   return lista;
+
+
+
+//const  App:React.FC= () => {
+  function   App ()  {
+
+   
+
+  const [reporteClima,setReporte]=useState <ClimaCiudad | undefined>(undefined);
+ 
+  //const [reporteClima,setReporte]=useState({datos:{} as ClimaCiudad});
+  console.log('reporteClima inicializado:',typeof reporteClima)
+  
+  const buscarCiudades = async (e: any):Promise<void> => {
+    try {
+      const listaCiudades = await getAXIOSCiudades('Mérida');
+      setReporte(listaCiudades.data);
+      console.log('listaCiudades', listaCiudades.data);
+      console.log('reporteClima asignado', reporteClima);
+      let nue= reporteClima as ClimaCiudad;
+      console.log(nue)
+      } catch (error) { 
+        if ( error.response ) {
+        console.log('¡Error!',error.message, '\n error.response es:', error.response, '\n error.response.status',
+                error.response.status, '\n error.response.headers',error.response.headers,
+                '\n error.response.data.message',error.response.data.message)
+        }
+      }
+    }
+
+// const DetailClima = ({weather}:clima) => {
+//   return Object.entries(props.weather).map(hecho =>  <p> {hecho[0].toString()}: {hecho[1].toString()}</p>)
+  
 // }
 
-const APIURL= 'api.openweathermap.org/data/2.5/weather';
-const APIKEY= process.env.OPENWEATHERMAP_APIKEY
+  
+    //HTMLElement 
+// const DespliegaDatosClima =(datos:ClimaCiudad): JSX.Element => {
+  const DespliegaDatosClima =(props:any): JSX.Element => {
+  try { 
+    console.log(props)
+    
+  return (
+    
+    <div> 
+        <h2>{props.children.name}</h2> 
+        
+      <ul>
+{/* <DetailClima weather={datos.weather}/> */}
+{/* {Object.entries(datos.weather).map(hecho =>  <p> {hecho[0].toString()}: {hecho[1].toString()}</p>)} */}
+ {Object.entries(props.children.weather).map((key,value) =>  <p> {key.toString()} : {value.toString()}</p>)} 
 
-const getAXIOSCiudades = (param: string) => axios.get(`${APIURL}/?1q=${param}&units=metric&lang=es&apiid=${APIKEY}`);
+      </ul>
+    </div>  );
+  } catch (e) {
+    console.log('Errorsote',e);
+    return (<div></div>)
+  }
 
-// // const get_ciudades: (ciudades:Ciudad[]) => Ciudad[] =
-// //     (lciudades: Ciudad[]) => { return  lciudades.filter((city:Ciudad) => (city.country)==='MX'); }
-
-// // let ciudades_Mexico=get_ciudades(lista);
-
-
-const buscarCiudades = async (e: any) => {
-// 
-const listaCiudades = await getAXIOSCiudades('Saltillo');
-setReporte(listaCiudades);
 }
 
-
-function App() {
+ 
   return (
     <div className="App">
       <div>
@@ -52,7 +84,8 @@ function App() {
       </div>
       <hr></hr>
       <div>
-        {reporteClima}
+          <DespliegaDatosClima> {reporteClima} </DespliegaDatosClima>
+      {/* {reporteClima ? DespliegaDatosClima (reporteClima) : { {name:'que pintar'}} } */}
       </div>
   
     </div>

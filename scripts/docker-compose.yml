@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  ofercte:
+    image: robervh/visiting-cities
+    ports: 
+      - 3000:3000
+    command: sh -c "npm install && npm start"
+    volumes:
+      - ../:/usr/app
