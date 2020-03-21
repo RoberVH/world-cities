@@ -15,13 +15,8 @@ const getAXIOSCiudades:(ciudad: string) => Promise<AxiosResponse<any>> = (ciudad
          `${APIURL}?q=${ciudad}&units=metric&lang=es&appid=${REACT_APP_OPENWEATHERMAP_APIKEY}`);
 
 
-
-
-
 //const  App:React.FC= () => {
-  function   App ()  {
-
-   
+  function   App ()  { 
 
   const [reporteClima,setReporte]=useState <ClimaCiudad | undefined>(undefined);
  
@@ -45,17 +40,10 @@ const getAXIOSCiudades:(ciudad: string) => Promise<AxiosResponse<any>> = (ciudad
       }
     }
 
-// const DetailClima = ({weather}:clima) => {
-//   return Object.entries(props.weather).map(hecho =>  <p> {hecho[0].toString()}: {hecho[1].toString()}</p>)
-  
-// }
-
-  
-    //HTMLElement 
-// const DespliegaDatosClima =(datos:ClimaCiudad): JSX.Element => {
   const DespliegaDatosClima =(props:any): JSX.Element => {
   try { 
-    console.log(props)
+     {typeof reporteClima !== 'undefined' ? DespliegaDatosClima (reporteClima) : <h1>{'Seleccione una Ciudad'}</h1>} 
+    console.log('Props en DespliegaDatosClima', props)
     
   return (
     
@@ -84,8 +72,8 @@ const getAXIOSCiudades:(ciudad: string) => Promise<AxiosResponse<any>> = (ciudad
       </div>
       <hr></hr>
       <div>
-          <DespliegaDatosClima> {reporteClima} </DespliegaDatosClima>
-      {/* {reporteClima ? DespliegaDatosClima (reporteClima) : { {name:'que pintar'}} } */}
+        {/*  <DespliegaDatosClima> {reporteClima} </DespliegaDatosClima>*/}
+     {typeof reporteClima !== 'undefined' ? DespliegaDatosClima (reporteClima) : <h1>{'Seleccione una Ciudad'}</h1>} 
       </div>
   
     </div>
