@@ -1,69 +1,34 @@
 /* eslint-disable no-sequences */
 import React, {useState} from 'react';
 import './App.css';
-import axios, { AxiosResponse } from 'axios';
-import {REACT_APP_OPENWEATHERMAP_APIKEY} from './config/globals';
+import { getAXIOSCiudades }  from './network';
 //import  {coordenadas, clima, principal, viento, sistema} from  './config/types';
 import { ClimaCiudad, clima } from './config/types';
-import { promises } from 'dns';
+import { DespliegaDatosClima } from "./clima";
 
 
-const APIURL= 'http://api.openweathermap.org/data/2.5/weather/';
-//&units=metric&lang=es
-//const getAXIOSCiudades = (param: string) => axios.get(`${APIURL}?q=${param}&units=metric&lang=es&appid=${REACT_APP_OPENWEATHERMAP_APIKEY}`);
-const getAXIOSCiudades:(ciudad: string) => Promise<AxiosResponse<any>> = (ciudad) => axios.get(
-         `${APIURL}?q=${ciudad}&units=metric&lang=es&appid=${REACT_APP_OPENWEATHERMAP_APIKEY}`);
 
-
-//const  App:React.FC= () => {
-  function   App ()  { 
+const  App:React.FC= () => {
 
   const [reporteClima,setReporte]=useState <ClimaCiudad | undefined>(undefined);
  
   //const [reporteClima,setReporte]=useState({datos:{} as ClimaCiudad});
-  console.log('reporteClima inicializado:',typeof reporteClima)
+  console.log('function App -> reporteClima inicializado:',typeof reporteClima)
   
   const buscarCiudades = async (e: any):Promise<void> => {
     try {
-      const listaCiudades = await getAXIOSCiudades('Mérida');
+      const listaCiudades = await getAXIOSCiudades('New York');
       setReporte(listaCiudades.data);
-      console.log('listaCiudades', listaCiudades.data);
-      console.log('reporteClima asignado', reporteClima);
-      let nue= reporteClima as ClimaCiudad;
-      console.log(nue)
+      console.log('listaCiudades del API', listaCiudades.data);
+      console.log('reporteClima asignado a Objecto', reporteClima);
       } catch (error) { 
         if ( error.response ) {
-        console.log('¡Error!',error.message, '\n error.response es:', error.response, '\n error.response.status',
+        console.log('¡Error buscando ciudades!',error.message, '\n error.response es:', error.response, '\n error.response.status',
                 error.response.status, '\n error.response.headers',error.response.headers,
                 '\n error.response.data.message',error.response.data.message)
         }
       }
     }
-
-  const DespliegaDatosClima =(props:any): JSX.Element => {
-  try { 
-     {typeof reporteClima !== 'undefined' ? DespliegaDatosClima (reporteClima) : <h1>{'Seleccione una Ciudad'}</h1>} 
-    console.log('Props en DespliegaDatosClima', props)
-    
-  return (
-    
-    <div> 
-        <h2>{props.children.name}</h2> 
-        
-      <ul>
-{/* <DetailClima weather={datos.weather}/> */}
-{/* {Object.entries(datos.weather).map(hecho =>  <p> {hecho[0].toString()}: {hecho[1].toString()}</p>)} */}
- {Object.entries(props.children.weather).map((key,value) =>  <p> {key.toString()} : {value.toString()}</p>)} 
-
-      </ul>
-    </div>  );
-  } catch (e) {
-    console.log('Errorsote',e);
-    return (<div></div>)
-  }
-
-}
-
  
   return (
     <div className="App">
