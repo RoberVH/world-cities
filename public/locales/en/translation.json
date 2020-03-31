@@ -1,0 +1,22 @@
+
+  {
+    "main": {
+        "banner": "Visiting Cities",
+        "selectcity": "Select a City",
+        "b_searchcity": "Search City",
+        "city":"City",
+        "country":"Country",
+        "notfound": "City not Found, check input data"
+    },
+    "cityinput" : {
+      "lblcountry": "Country",
+      "lblcity":"City",
+      "b_searchcity": "Search City"
+    },
+    "Weather" : {
+        "temp" : "Temperature",
+        "feelslike" : "Feels Like",
+        "mintemp": "Minimum Temperature",
+        "maxtemp": "Maximum Temperature" 
+    }
+  }

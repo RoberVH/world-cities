@@ -1,12 +1,12 @@
 /**
- * clima.js  - All related to weather data
+ * clima.js  - All functions related to weather data
  * 
  */
 import React from 'react'
-import { ClimaCiudad, clima } from './config/types';
+import { CityWeather } from './config/types';  //, clima
 
 
-export const DespliegaDatosClima =(props:ClimaCiudad): JSX.Element => {
+export const DespliegaDatosClima =(props:CityWeather): JSX.Element => {
     try { 
       console.log('Props en DespliegaDatosClima', props)
     return (

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type coordenadas = {
     lon: number;
     lat: number
@@ -31,7 +33,7 @@ export  type sistema = {
     sunset?: number;
   }
 
-  export interface ClimaCiudad  {
+  export interface CityWeather  {
     coord: coordenadas;
     weather: clima;  // clima[] | clima para prevenir cuando es arreglo, checar API
     main: principal;
@@ -45,6 +47,17 @@ export  type sistema = {
     id: number;
     name: string;
     cod: number;
-
 }
+
+export type CityValues = {
+  country?: string;
+  city: string
+}
+
+export type RequestInputData = {
+  values : CityValues;
+  handleSubmit : (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  }
+
 
