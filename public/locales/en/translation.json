@@ -3,20 +3,34 @@
     "main": {
         "banner": "Visiting Cities",
         "selectcity": "Select a City",
-        "b_searchcity": "Search City",
-        "city":"City",
-        "country":"Country",
-        "notfound": "City not Found, check input data"
+        "notfound": "City not Found, check input data",
+        "selectcountry": "Select Country",
+        "selectlanguage": {
+           "prompt":"Choose a Language",
+           "english":"English",
+           "spanish":"Spanish",
+           "german":"German",
+           "french":"French",
+           "portuguese":"Portuguese"
+          }
     },
     "cityinput" : {
       "lblcountry": "Country",
       "lblcity":"City",
-      "b_searchcity": "Search City"
+      "searchcity": "Search City"
     },
-    "Weather" : {
+    "weather" : {
         "temp" : "Temperature",
         "feelslike" : "Feels Like",
-        "mintemp": "Minimum Temperature",
-        "maxtemp": "Maximum Temperature" 
+        "mintemp": "Min Temp Deviation",
+        "maxtemp": "Max Tem Deviation",
+        "humidity": "Humidity",
+        "pressure": "Pressure",
+        "degrees": "degrees",
+        "userlocaltime": "Received at (your time)",
+        "sunrise": "Sunrise at",
+        "sunset": "Sunset at",
+        "main": "Condition",
+        "description": "Detail"
     }
   }

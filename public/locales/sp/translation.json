@@ -1,0 +1,35 @@
+
+  {
+    "main": {
+        "banner": "Visitando Ciudades",
+        "selectcity": "Selecciona una Ciudad",
+        "city":"Ciudad",
+        "country":"País",
+        "notfound": "No se halló la Ciudad, verifica los datos de entrada",
+        "selectcountry": "Selecciona País",
+        "selectlanguage": {
+          "english":"Inglés",
+          "spanish":"Español",
+          "german":"Alemán",
+          "french":"Francés",
+          "portuguese":"Portugués"
+        }
+    },
+    "cityinput" : {
+      "lblcountry": "País",
+      "lblcity":"Ciudad",
+      "searchcity": "Buscar Ciudad"
+    },
+    "weather" : {
+        "temp" : "Temperatura",
+        "feelslike" : "Se siente como",
+        "humidity": "Humedad",
+        "pressure": "Presión",
+        "degrees": "Grados",
+        "userlocaltime": "Recibido (tu hora local)",
+        "sunrise": "Salida del sol",
+        "sunset": "Puesta del Sol",
+        "main": "Condición",
+        "description": "Detalle"
+    }
+  }

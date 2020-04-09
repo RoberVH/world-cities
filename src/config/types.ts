@@ -1,4 +1,6 @@
 import React from 'react';
+import { ValueType, ActionMeta } from "react-select/src/types";
+//import { ActionMeta, OptionProps, ValueType } from "react-select/src/types"; // tslint:disable-line no-submodule-imports
 
 export type coordenadas = {
     lon: number;
@@ -9,7 +11,7 @@ export type clima = {
     id: number;
     main: string;           // Group of weather parameters (Rain, Snow, Extreme etc.)
     description: string;    // Weather condition within the group.
-  //  icon: any
+    icon: string;
   }
   
 export   type principal = {
@@ -29,13 +31,16 @@ export   type viento = {
   
 export  type sistema = {
     country: string;
-    sunrise?: number;
-    sunset?: number;
+    name: string;
+    sunrise: number;
+    sunset: number;
   }
+
+
 
   export interface CityWeather  {
     coord: coordenadas;
-    weather: clima;  // clima[] | clima para prevenir cuando es arreglo, checar API
+    weather: clima[];  // clima[] | clima para prevenir cuando es arreglo, checar API
     main: principal;
     visibility: number;
     base: string;
@@ -50,14 +55,20 @@ export  type sistema = {
 }
 
 export type CityValues = {
-  country?: string;
+  country?: {label:string; value:string};
   city: string
 }
+
+type OptionType = { 
+  label: string; 
+  value: string 
+};
 
 export type RequestInputData = {
   values : CityValues;
   handleSubmit : (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  }
+  handleSelectChange: (selectedOption: ValueType<OptionType>, event:ActionMeta)  => void;
+}
 
 

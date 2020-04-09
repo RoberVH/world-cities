@@ -25,3 +25,6 @@ yarn-error.log*
 # COnfiguration env vars  (Psw & API keys)
 .env
 ./config/env.js
+
+# de transicion
+borrar.tsx

@@ -5,43 +5,40 @@ import './App.css';
 
 //import  {coordenadas, clima, principal, viento, sistema} from  './config/';
 import { CityWeather, RequestInputData } from './config/types'; //, CityValues
-import { DespliegaDatosClima } from "./clima";
-import CityInput from './components/cityinput';
+import { DisplayWeatherData } from './components/DespliegaDatoClima';
+import ChangeLanguage from './components/ChangeLanguage';
+import CityInput from './components/Cityinput';
+//import DisplaySession from './components/DisplaySession'
 import userHooksForm  from './utils/userHookForms'; 
-import { getAXIOSCiudades } from './utils/network'
-
-
+import { getAXIOSCiudades } from './utils/network';
+//import userSession from './utils/useMaintainSession';
+//import {userSessionKey} from './config/globals';
 
 
 const  App:React.FC= (props) => {
 
-  const { t } = useTranslation();
-
-  const despliegaNoCity = (notFound: boolean)  => {
+ const { t } = useTranslation();
+ 
+  const displayNoCityMsg = (notFound: boolean)  => {
       if (notFound)  return <p>{t("main.notfound")}</p>
          else return  <p>{t("main.selectcity")}</p>
   }
 
- // const requestDataWeather = async (e:  React.MouseEvent<HTMLButtonElement>):Promise<void> => {
-   // e.preventDefault();
-   const requestDataWeather = async ():Promise<void> => {
+
+  const requestDataWeather = async ():Promise<void> => {
     try {
       setNoCityFound(false);
-      const cityName= inputReturnValues.values.city;
-      const countryName= inputReturnValues.values.country;
-      console.log('cityName,countryName',cityName,countryName);
-      setReporte(undefined);
-     
-      
-      const listaCiudades = await getAXIOSCiudades(cityName,countryName);
+      console.log('Param de entrada: ',inputReturnValues.values.city ,inputReturnValues.values.country?.value)
+      setweatherReport(undefined);
+      const listaCiudades = await getAXIOSCiudades(inputReturnValues.values.city , inputReturnValues.values.country?.value);
       if (listaCiudades) {
-        setReporte(listaCiudades.data);
+        setweatherReport(listaCiudades.data);
         console.log('listaCiudades del API', listaCiudades.data);
-        console.log('reporteClima asignado a Objecto', reporteClima);
+        console.log('weatherReport asignado a Objecto', weatherReport);
       } else {
         console.log('No hubo resultados');
         setNoCityFound(true);
-
+ 
       }
       } catch (error) { 
         if ( error.response ) {
@@ -53,36 +50,29 @@ const  App:React.FC= (props) => {
       }
     }
   
-  //const { values, handleChange, handleSubmit }:RequestInputData = userHooksForm(requestDataWeather);
   const inputReturnValues:RequestInputData = userHooksForm(requestDataWeather);
-  
-  const [reporteClima,setReporte]= useState <CityWeather | undefined>(undefined);
+  const [weatherReport,setweatherReport]= useState <CityWeather | undefined>(undefined);
   const [notCityFound,setNoCityFound] = useState(false)
-
-  //const [{cityName, countryName},setInputDataCity]= useState(''); // < CityRequested| undefined>(undefined);
-  //const [countryName,setCountry]= useState(''); // < CityRequested| undefined>(undefined);
   
-  
-  console.log('function App -> reporteClima inicializado:',typeof reporteClima)
-  
-
- 
   return (
     <div className="App">
       <div>{t("main.banner")}</div>
+      <div>
+      <ChangeLanguage/>
+      </div>
       <div>
         <CityInput 
           values= {inputReturnValues.values}
           handleSubmit= {inputReturnValues.handleSubmit}
           handleChange= {inputReturnValues.handleChange} 
+          handleSelectChange= {inputReturnValues.handleSelectChange} 
         />
       </div>
       <hr></hr>
       <div>
-        {/*  <DespliegaDatosClima> {reporteClima} </DespliegaDatosClima>*/}
-     {typeof reporteClima !== 'undefined' ? DespliegaDatosClima (reporteClima) : despliegaNoCity(notCityFound)} 
+        {/*  <DisplayWeatherData> {weatherReport} </DisplayWeatherData>*/}
+     {typeof weatherReport !== 'undefined' ? DisplayWeatherData (weatherReport,t) : displayNoCityMsg(notCityFound)} 
       </div>
-  
     </div>
   );
 }

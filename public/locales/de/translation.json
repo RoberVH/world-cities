@@ -1,0 +1,35 @@
+
+  {
+    "main": {
+        "banner": "Städte besuchen",
+        "selectcity": "Wählen Sie eine Stadt",
+        "city":"Stadt",
+        "country":"Land",
+        "notfound": "Stadt nicht gefunden, Eingabedaten überprüfen",
+        "selectcountry": "Land auswählen",
+        "selectlanguage": {
+          "english":"English",
+          "spanish":"Spanische",
+          "german":"Deutch",
+          "french":"Französisch",
+          "portuguese":"Portugiesisch"
+      }
+    },
+    "cityinput" : {
+      "lblcountry": "Land",
+      "lblcity":"Stadt",
+      "searchcity": "Suche Stadt"
+    },
+    "weather" : {
+        "temp" : "Temperatur",
+        "feelslike" : "Se siente como",
+        "humidity": "Humidity",
+        "pressure": "Presión",
+        "degrees": "grados",
+        "userlocaltime": "Recibido (tu hora local)",
+        "sunrise": "Salida del sol",
+        "sunset": "Puesta del Sol",
+        "main": "Zustand",
+        "description": "Detail"
+    }
+  }

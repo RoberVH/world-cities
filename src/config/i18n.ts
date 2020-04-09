@@ -11,22 +11,23 @@ i18n
   .use(Backend)
   .use(LanguageDetector)
   // connect with React
-  .use(initReactI18next)
+  .use(initReactI18next) // Make instance of il8next available to useTranslation hook in any React  Components
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true,
     lng: 'en',
     fallbackLng: 'en',
     load: 'languageOnly',
-    whitelist: ['en', 'de'],
+    whitelist: ['en', 'sp', 'de', 'fr','pt'],
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
     react: {
-      wait: true
+      wait: true,
     },
     backend: {
       allowMultiLoading: true,
       },
   });
+  
 export default i18n;

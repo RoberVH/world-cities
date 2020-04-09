@@ -18,15 +18,18 @@ const useHooksForm = (callback:Function):RequestInputData => {
     event.persist();
     setValues(values => ({ ...values, [event.target.id]: event.target.value }));
   };
-/*
-  const resetForm = () => {
-      for (let prop in values)
-          setValues(values[prop]=null)
-    
-  }*/
+
+  // Configuring react-select signature this time is a bit hard to find informatio,  this method works ok for present version 3.1.0 
+  // Notice that type is build with type["subtype"] as oppose to type.subtype (which won't work here)
+  const handleSelectChange: RequestInputData["handleSelectChange"] = (selectedOption, event) => { 
+    setValues(values => ({ ...values, [event.name!]: selectedOption!}));
+    console.log('VAL',values.country?.value)
+   }
+
   return {
     handleChange,
     handleSubmit,
+    handleSelectChange,
     values,
   }
 };
