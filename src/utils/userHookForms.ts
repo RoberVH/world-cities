@@ -9,15 +9,27 @@ const useHooksForm = (callback:Function):RequestInputData => {
 
   const [values, setValues] = useState({} as CityValues);
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit =(event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (event) event.preventDefault();
       callback();
   };
 
-  const handleChange = (event: { persist: () => void; target: { id: any; value: any; }; }) => {
+
+  // const handleSubmit = (event: { preventDefault: () => void; }) => {
+  //   if (event) event.preventDefault();
+  //     callback();
+  // };
+
+  
+  const handleChange=(event:React.ChangeEvent<HTMLInputElement>)  => {
     event.persist();
     setValues(values => ({ ...values, [event.target.id]: event.target.value }));
   };
+
+  // const handleChange = (event: { persist: () => void; target: { id: any; value: any; }; }) => {
+  //   event.persist();
+  //   setValues(values => ({ ...values, [event.target.id]: event.target.value }));
+  // };
 
   // Configuring react-select signature this time is a bit hard to find informatio,  this method works ok for present version 3.1.0 
   // Notice that type is build with type["subtype"] as oppose to type.subtype (which won't work here)

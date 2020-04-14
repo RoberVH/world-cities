@@ -15,8 +15,7 @@ export const DisplayWeatherData =(props:CityWeather, t:any): JSX.Element => {
   console.log('Segun moment ',timepo,moment.unix( timepo).toDate())
   
   try { 
-      console.log('Props en DisplayWeatherData', props)
-      //http://openweathermap.org/img/wn/10d@2x.png
+      //console.log('Props en DisplayWeatherData', props)
     return (
       <Suspense fallback="loading">
        <div>

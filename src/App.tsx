@@ -2,44 +2,50 @@
 import React, {useState} from 'react';
 import { withTranslation, useTranslation } from 'react-i18next';
 import './App.css';
-
-//import  {coordenadas, clima, principal, viento, sistema} from  './config/';
-import { CityWeather, RequestInputData } from './config/types'; //, CityValues
+import { CityWeather, RequestInputData, User } from './config/types'; //, CityValues
+import LoginHolder from './components/LoginHolder';
 import { DisplayWeatherData } from './components/DespliegaDatoClima';
 import ChangeLanguage from './components/ChangeLanguage';
 import CityInput from './components/Cityinput';
-//import DisplaySession from './components/DisplaySession'
 import userHooksForm  from './utils/userHookForms'; 
 import { getAXIOSCiudades } from './utils/network';
-//import userSession from './utils/useMaintainSession';
-//import {userSessionKey} from './config/globals';
+import { checkAuth } from './config/firebase';
+
 
 
 const  App:React.FC= (props) => {
 
  const { t } = useTranslation();
+ const [weatherReport,setweatherReport]= useState <CityWeather | undefined>(undefined);
+ const [notCityFound,setNoCityFound] = useState(false)
+// const userProv: User={username:'', logged:false};
+
+ //const [user, setUser]= useState<User>(userProv);
+ console.log('setting user undefined ---------')
+ const [user, setUser]= useState<User|undefined>(undefined);
+ 
+ checkAuth();
  
   const displayNoCityMsg = (notFound: boolean)  => {
       if (notFound)  return <p>{t("main.notfound")}</p>
          else return  <p>{t("main.selectcity")}</p>
-  }
-
-
+        }
+      
+      
   const requestDataWeather = async ():Promise<void> => {
-    try {
+    setUser ({username:'Roberto Viqua', logged:true})
+    try { 
       setNoCityFound(false);
       console.log('Param de entrada: ',inputReturnValues.values.city ,inputReturnValues.values.country?.value)
       setweatherReport(undefined);
       const listaCiudades = await getAXIOSCiudades(inputReturnValues.values.city , inputReturnValues.values.country?.value);
       if (listaCiudades) {
-        setweatherReport(listaCiudades.data);
-        console.log('listaCiudades del API', listaCiudades.data);
-        console.log('weatherReport asignado a Objecto', weatherReport);
+          setweatherReport(listaCiudades.data);
+          console.log('listaCiudades del API', listaCiudades.data);
       } else {
-        console.log('No hubo resultados');
-        setNoCityFound(true);
- 
-      }
+          console.log('No hubo resultados');
+          setNoCityFound(true);
+       }
       } catch (error) { 
         if ( error.response ) {
           setNoCityFound(true)
@@ -50,16 +56,23 @@ const  App:React.FC= (props) => {
       }
     }
   
+    
   const inputReturnValues:RequestInputData = userHooksForm(requestDataWeather);
-  const [weatherReport,setweatherReport]= useState <CityWeather | undefined>(undefined);
-  const [notCityFound,setNoCityFound] = useState(false)
+// provisional
+    
+    console.log(user)
   
   return (
+    
     <div className="App">
       <div>{t("main.banner")}</div>
-      <div>
-      <ChangeLanguage/>
+      <div>  
+        <LoginHolder 
+          user={user} 
+          setUser={setUser}/>
+        <ChangeLanguage/>
       </div>
+      <hr></hr>
       <div>
         <CityInput 
           values= {inputReturnValues.values}
@@ -70,8 +83,7 @@ const  App:React.FC= (props) => {
       </div>
       <hr></hr>
       <div>
-        {/*  <DisplayWeatherData> {weatherReport} </DisplayWeatherData>*/}
-     {typeof weatherReport !== 'undefined' ? DisplayWeatherData (weatherReport,t) : displayNoCityMsg(notCityFound)} 
+          {typeof weatherReport !== 'undefined' ? DisplayWeatherData (weatherReport,t) : displayNoCityMsg(notCityFound)} 
       </div>
     </div>
   );

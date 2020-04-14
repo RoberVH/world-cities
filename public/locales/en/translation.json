@@ -12,7 +12,8 @@
            "german":"German",
            "french":"French",
            "portuguese":"Portuguese"
-          }
+          },
+        "selectauth": "LogIn"
     },
     "cityinput" : {
       "lblcountry": "Country",
