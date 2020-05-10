@@ -33,5 +33,10 @@
         "sunset": "Sunset at",
         "main": "Condition",
         "description": "Detail"
+    },
+    "errors" : {
+      "noopenweatherapi": "Error. Can not get access to DataBase (retry later)",
+      "failedopenweathercall": "Error. Can not get City from Source (retry later)",
+      "noresponsefromodatabase":" Error. Can not get response from DataBase (retry later)"
     }
   }

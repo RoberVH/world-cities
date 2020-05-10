@@ -3,27 +3,24 @@ import { ValueType, ActionMeta } from "react-select/src/types";
 //import { ActionMeta, OptionProps, ValueType } from "react-select/src/types"; // tslint:disable-line no-submodule-imports
 //setUser: React.Dispatch<React.SetStateAction<{username:string, logged:Boolean}>> 
 
+
+// Authorization Provider Enumeration
+// Having every provider element index match their corresponding string name  simplify when managing
+// selection of icons and serialization / deserializatiobn  to browser sessin manager  at LoginHolder Component
 export enum AuthorizationProvider {
-  Google,
-  Facebook,
-  Twitter,
-  Github
+  Google='Google',      
+  Facebook='Facebook',
+  Twitter='Twitter',
+  Github='Github'
 }
 
 export type User = {
   username:string;
   logged:boolean;
-  authProv?: AuthorizationProvider
+  authProv?: AuthorizationProvider;
+  weatherAPIKEY?: string;
   }
 
-// export type userSettter =  {
-//   setUser:(setUser:React.Dispatch<React.SetStateAction<User>>) => void; 
-// }
-
-// export type AppUser = {
-//   user:User;
-//   setUser: userSettter;
-// }
 
 export type coordenadas = {
     lon: number;

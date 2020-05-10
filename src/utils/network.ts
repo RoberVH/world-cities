@@ -3,18 +3,18 @@
  */
  
 import axios, { AxiosResponse } from 'axios';
-import {REACT_APP_OPENWEATHERMAP_APIKEY} from '../config/globals';
+//import {REACT_APP_OPENWEATHERMAP_APIKEY} from '../config/globals';
  
-const APIURL= 'http://api.openweathermap.org/data/2.5/weather/';
+//const APIURL= 'http://api.openweathermap.org/data/2.5/weather/';
 
 //export const getAXIOSCiudades:(ciudad: string, country?:string) => Promise<AxiosResponse<Array<any>>> = (city,country) =>{
-export const getAXIOSCiudades =(city: string, country?:string) : Promise<AxiosResponse> | undefined => {
+export const getAXIOSCiudades =(apiurl: string, apikey: string, city: string, country?:string) : Promise<AxiosResponse> | undefined => {
     const undefinedValue =typeof undefined;
     const countryName = (typeof country === undefinedValue || country === '')? '': `,${country}`;
     const cityName= (typeof city === undefinedValue )? '': `,${city}`;
     if (cityName !== '') {
-        console.log(`${APIURL}?q=${city}${countryName}&units=metric&lang=es&appid=${REACT_APP_OPENWEATHERMAP_APIKEY}`)
-        return axios.get(`${APIURL}?q=${city}${countryName}&units=metric&lang=es&appid=${REACT_APP_OPENWEATHERMAP_APIKEY}`);
+        console.log(`${apiurl}?q=${city}${countryName}&units=metric&lang=es&appid=${apikey}`)
+        return axios.get(`${apiurl}?q=${city}${countryName}&units=metric&lang=es&appid=${apikey}`);
     } else {
         return undefined;
     }
