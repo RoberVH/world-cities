@@ -25,11 +25,14 @@
         "feelslike" : "Se siente como",
         "humidity": "Humedad",
         "pressure": "Presión",
-        "degrees": "Grados",
+        "degrees": "grados",
         "userlocaltime": "Recibido (tu hora local)",
         "sunrise": "Salida del sol",
         "sunset": "Puesta del Sol",
         "main": "Condición",
         "description": "Detalle"
+    },
+    "camera": {
+      "nowebcameras":"No hay cámaras Web para mostrar en esta ciudad actualmente"
     }
   }

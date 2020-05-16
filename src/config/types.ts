@@ -91,4 +91,43 @@ export type RequestInputData = {
   handleSelectChange: (selectedOption: ValueType<OptionType>, event:ActionMeta)  => void;
 }
 
+type dimensions = {
+    width:number;
+    height: number;
+}
 
+// structure of incumbent values of a WebCam record as Windy.com returns them
+export type WebCamObject = {
+  id: string;
+  title: string;
+  player: {
+    day: { 
+          embed: string;  //embeddadble link to WebCam video
+        }
+  }
+  image: {
+    current: {
+          thumbnail: string;  // image to display for a webcam link
+        }
+    sizes: {
+          thumbnail: dimensions;
+          preview: dimensions;
+        }
+
+  }
+}
+
+// List of WebCam record as Windy.com returns them
+export type WebCamObjects = WebCamObject[];
+
+// structure to hold  metadata from city webcams for the component to display
+export type displayWebCamFrame = {
+  id: string
+  title: string;
+  link: string;
+  thumbnail: string;
+  thumbnailSize: dimensions;
+  linkSize: dimensions
+}
+
+export type displayWebCamFrames = displayWebCamFrame[]; // list of webCam metadata

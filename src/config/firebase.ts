@@ -30,19 +30,22 @@ auth.languageCode='sp'                              //Aqui cambiar el lenguaje!!
 export let provider: firebase.auth.AuthProvider;
 const bdFireBase= firebase.firestore();
 // const apiKeysDBCollection = bdFireBase.collection('apikeys');
-const apikeysRef = bdFireBase.doc('apikeys/OpenWeather') 
-
+//const apikeysRef = bdFireBase.doc('apikeys/OpenWeather') 
+const apiDBCollection = bdFireBase.collection('apikeys');
 /**
  * getAPIKEY- Get an API Key for service (ServiceName) from Firebase Cloud Firestore DB
  */
 export const getAPIKEY:(serviceName:string) => any = async(serviceName) => {
     try {
-        const apiResults= await apikeysRef.get();
+        
+        //console.log('serviceName',serviceName)
+        const apiResults = await apiDBCollection.doc(serviceName).get();
+        //const apiResults= await apikeysRef.get(); 
         if (apiResults && apiResults.exists) {
-        console.log('apiResults!:',apiResults.data())
-        // const results= await apiKeysDBCollection.where(SERVICE_NAME_FIELD,'==',serviceName).get();
-        // console.log('results', typeof results, ' -> ', results)
-        return apiResults.data()    } else { 
+          /*  const obj = apiResults.data()
+           console.log('!',serviceName,' regreso',obj!.key,obj!.url);*/
+            return apiResults.data();
+          } else { 
             console.log('NO se pudo recuperar api key')
             return null
         }
@@ -84,12 +87,8 @@ export const signInWithProv:(selectedProvider:AuthorizationProvider) => Promise<
     }
   };
 
-//export const unsubscribe= () => auth.onAuthStateChanged(userAuth => {
     export const listenerAuthState =  auth.onAuthStateChanged(userAuth => {
-    console.log('listener llamado!')
     if (userAuth) {
-        console.log('Usuario:',userAuth);
-        console.log('Usuario.DisplayName:',auth.currentUser?.displayName)
         return true
 
     } else {
