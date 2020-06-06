@@ -1,38 +1,29 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: 'Bellota-Regular';
+  src: local('Bellota-Regular'), url('../src/data/fonts/Bellota-Regular.ttf') format('truetype');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+    background-color: rgb(204, 134, 171,8%);
+    color: #000000;
+    border-bottom: solid,1px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.brand-logo {
+  font-family: 'Bellota-Regular';
+  font-size:40px;
+  font-weight: 400;
+  
+  
+}
+ 
+.highcolor {
+  color:rgb(212, 14, 74);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-nav, .navbar-light .nav-link {
+  font-size: 15px;
+
 }

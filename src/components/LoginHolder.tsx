@@ -88,12 +88,13 @@ const handleClickLogin: (authProv:AuthorizationProvider, setUser: (user:User) =>
  * 
  *****************************************************************************************************************/
 
-const LoginHolder:React.FC<{user:User | undefined, setUser:React.Dispatch<React.SetStateAction<User | undefined>>}> = ({user, setUser}) =>{
+const LoginHolder:React.FC<{user:User | undefined, setUser:React.Dispatch<React.SetStateAction<User | undefined>>}> = 
+      ({user, setUser}) =>{
   return (
           <div style={{width:"50%", display:"inline-block"}}>   
               {user && user.logged ? 
                 <div>
-                    <p>User logged: {user.username} through: 
+                    <p>User: {user.username} through: 
                     <img src={ProvAuthzIcons.get(user.authProv)} alt='Authorization Proxy' title='Authorization Proxy' 
                     width={WIDTH_RESIZE} height={HIGH_RESIZE} /> </p> 
                     <button onClick={() => signOut(setUser)}>SignOut</button>

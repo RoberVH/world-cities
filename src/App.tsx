@@ -2,6 +2,14 @@
 import React, {useState, useEffect} from 'react';
 import { withTranslation, useTranslation } from 'react-i18next';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from "react-bootstrap/Container";
+
+
 import { CityWeather, RequestInputData, User, WebCamObjects } from './config/types'; //, CityValues
 import LoginHolder from './components/LoginHolder';
 import { DisplayWeatherData } from './components/DisplayWeatherData';
@@ -12,7 +20,7 @@ import { requestCityDataWeather, requestCityWebCams} from './utils/network';
 import { getSessionUser, removeSessionUser } from './utils/useMaintainSession';
 import { listenerAuthState, SignOutUser } from './config/firebase';
 import { DisplayWebCams } from './components/DisplayCamarasWeb';
-
+//import logo from '../src/data/imgs/citieslogo4.png';
 
  
 
@@ -66,32 +74,53 @@ const requestCytyData = (): void => {
       requestCityWebCams(cityDataWeatherReport!.coord, setlistWebCAM)
   }
   },[cityDataWeatherReport]
-  )
+  ) 
   
   return (
-    <div className="App">
-      <div>{t("main.banner")}</div>
-      <div>  
-        <LoginHolder 
-          user={user} 
-          setUser={setUser}/>
-        <ChangeLanguage/>
-      </div>
-      <hr></hr>
-      <div>
-        <CityInput 
-          values= {inputReturnValues.values}
-          handleSubmit= {inputReturnValues.handleSubmit}
-          handleChange= {inputReturnValues.handleChange} 
-          handleSelectChange= {inputReturnValues.handleSelectChange} 
-        />
-      </div>
+    
+  <div>
+    <Navbar>  
+     <Container fluid>
+      <Row> 
+        <Col md={4}> 
+          <Navbar.Brand >
+            <span className="brand-logo">Visiting&nbsp;</span>
+            <span className="brand-logo highcolor">Cities</span>
+          </Navbar.Brand>
+        </Col>
+        <Col  md={8}>
+          <Nav>   
+            <LoginHolder 
+              user={user} 
+              setUser={setUser}/>
+          </Nav>   
+        </Col> 
+        <Col md={8}>        
+          <Nav>   
+            <ChangeLanguage/>
+          </Nav>
+        </Col>
+      </Row>
+      <Row>
+        <Nav>   
+            <CityInput 
+              values= {inputReturnValues.values}
+              handleSubmit= {inputReturnValues.handleSubmit}
+              handleChange= {inputReturnValues.handleChange} 
+              handleSelectChange= {inputReturnValues.handleSelectChange} 
+            />
+        </Nav>   
+      </Row>
+     </Container>
+    </Navbar>
       <hr></hr>
       <div>
           {typeof cityDataWeatherReport !== 'undefined' ? DisplayWeatherData(cityDataWeatherReport,t) : <label>{t("main.selectcity")}</label>} 
       </div>
       <div>
-  { listaWebCam ? DisplayWebCams (listaWebCam) :  <label>{t('camera.nowebcameras')}</label>}           
+        <div>
+          { listaWebCam ? DisplayWebCams (listaWebCam) :  <label>{t('camera.nowebcameras')}</label>}           
+        </div>
       </div>
     </div> 
   );
