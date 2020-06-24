@@ -1,5 +1,9 @@
 /**
  * network.ts   All API & requests sent over internet to query / affect data
+ *              Uses AXIOS to query Firebase Database, where the Apps API keys and base API urls are store 
+ *              and retrieve them each time an API call is to be made
+ *              This is because no custom server App is intended to be develop and used with this App to store 
+ *              API keys
  */
  
 import axios, { AxiosResponse } from 'axios';
@@ -10,7 +14,9 @@ import { coordenadas } from '../config/types';
 import il8n from '../config/i18n'; 
 
 
-
+/**     getAXIOSCiudades - get city weather conditions from https://openweathermap.org/
+ * 
+  */
 
 
 export const getAXIOSCiudades =(apiurl: string, apikey: string, city: string, country?:string) : Promise<AxiosResponse> | undefined => {
@@ -26,6 +32,10 @@ export const getAXIOSCiudades =(apiurl: string, apikey: string, city: string, co
     }
 }
 
+/**
+*       getAXIOSWebCams. Get links to webcams fragments from api.windy.com/webcams, it shows up to 10 video cameras
+*       showing city areas fragments that last different time lapses (usually betwwen  to  minutes)
+ */
 export const getAXIOSWebCams= (apiurl: string, apikey: string,coords:coordenadas): Promise<AxiosResponse> | undefined => {
     // Expect coords are not undefined or null
     // Build url request
@@ -45,10 +55,6 @@ export const getAXIOSWebCams= (apiurl: string, apikey: string,coords:coordenadas
 
 /**
  * requestCityDataWeather - Request data for city from Open Weather free, public API
- * @param setweatherReport 
- * @param t 
- * @param cityName 
- * @param country 
  */
 export const requestCityDataWeather = 
        async (setweatherReport:React.Dispatch<React.SetStateAction<CityWeather | undefined>>, 
@@ -56,7 +62,8 @@ export const requestCityDataWeather =
     
     const OPENWEATHER_API_NAME_FIELD= 'OpenWeather';  // DB name of OpenWeather (Weather data) API collection 
    
-    // Due to SelectReact return value of {label,value} can be undefined we better check for undefined value to pass down later
+    // Due to SelectReact return value of {label,value} can be undefined we better check for undefined value 
+    // to pass down later
     const undefinedValue =typeof undefined;
     const countryName = (typeof country === undefinedValue || country === '') ? '': `,${country}`;
    
@@ -64,7 +71,7 @@ export const requestCityDataWeather =
         // get OPENWATHER API key from firebase DB Cloud Firestore
         const resultsOpenWeatherAPIKey= await getAPIKEY(OPENWEATHER_API_NAME_FIELD);
         if (!resultsOpenWeatherAPIKey ) {
-            alert(`${t("error.noresponsefromodatabase")}`);
+            alert(`${t("errors.noresponsefromdatabase")}`);
             return
         }
         const apiKey=resultsOpenWeatherAPIKey.key;
@@ -72,7 +79,7 @@ export const requestCityDataWeather =
         setweatherReport(undefined);  // Preemptyvely Set state to No city
         const cityData = await getAXIOSCiudades(apiUrl, apiKey, cityName , countryName);
         if (cityData) {
-           // console.log('Setting cityData', cityData.data)
+            console.log('Setting cityData', cityData.data)
             setweatherReport(cityData.data);
         }
         } catch (error) { 
@@ -90,9 +97,7 @@ export const requestCityDataWeather =
 
 /**
  * requestCityWebCams - Get a list of title/thumbnail/link  to daily footage of WebCam from free, public Windy.com API
- * @param coords 
- * @param setlistWebCAM 
- */
+  */
   export const requestCityWebCams = 
     async (coords:coordenadas,
             setlistWebCAM: React.Dispatch<React.SetStateAction<WebCamObjects | undefined>>
@@ -122,7 +127,7 @@ export const requestCityDataWeather =
                         console.log('No huubo camaras', cityWebCamList.data)
                     }
             } else {
-                console.log('Sin resultados')
+                console.log('No results')
             }
         } catch (error) {  
             console.log('Error loco:',error)

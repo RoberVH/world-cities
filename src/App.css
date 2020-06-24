@@ -1,29 +1,31 @@
-@font-face {
-  font-family: 'Bellota-Regular';
-  src: local('Bellota-Regular'), url('../src/data/fonts/Bellota-Regular.ttf') format('truetype');
+:root {
+  --header-bg-color: rgb(126, 190, 241);
+  --inputcity-font-size: 16px;
+  --label-color: #ffffff;
 }
 
-.navbar {
-    background-color: rgb(204, 134, 171,8%);
-    color: #000000;
-    border-bottom: solid,1px;
+.frame-title {
+
+  width: 80%;
+  margin: auto;
+}
+.frame-title p {
+  height: 15px;
+  text-align: center;
+  margin-top:5px;
+  padding-top: 5px;
 }
 
-.brand-logo {
-  font-family: 'Bellota-Regular';
-  font-size:40px;
-  font-weight: 400;
-  
-  
-}
- 
-.highcolor {
-  color:rgb(212, 14, 74);
+.frame-cards {
+  background-color: white;
+  display:flex; 
+  margin: 10px auto;
 }
 
-
-
-.navbar-nav, .navbar-light .nav-link {
-  font-size: 15px;
-
+.web-cameras-pending {
+  color: gray;
+  height: 15px;
+  text-align: center;
+  margin-top:25px;
+  padding-top: 5px;
 }

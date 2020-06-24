@@ -2,9 +2,9 @@
   {
     "main": {
         "banner": "Visiting Cities",
-        "selectcity": "Select a City",
-        "notfound": "City not Found, check input data",
         "selectcountry": "Select Country",
+        "notfound": "City not Found, check input data",        
+        "siginrequest":"Sign In to choose City",
         "selectlanguage": {
            "prompt":"Choose a Language",
            "english":"English",
@@ -12,16 +12,17 @@
            "german":"German",
            "french":"French",
            "portuguese":"Portuguese"
-          },
-        "selectauth": "LogIn"
+          }
     },
     "cityinput" : {
+      "selectcity": "Enter City",
       "lblcountry": "Country",
       "lblcity":"City",
       "searchcity": "Search City",
-      "luckysearcher":"I am going to have luck"
+      "promptcityinput":"* Required Field"
     },
     "weather" : {
+        "weatherheader":"Current Weather Conditions for ",
         "temp" : "Temperature",
         "feelslike" : "Feels Like",
         "mintemp": "Min Temp Deviation",
@@ -29,18 +30,19 @@
         "humidity": "Humidity",
         "pressure": "Pressure",
         "degrees": "degrees",
-        "userlocaltime": "Received at (your time)",
+        "userlocaltime": "As of ",
         "sunrise": "Sunrise at",
         "sunset": "Sunset at",
         "main": "Condition",
         "description": "Detail"
     },
     "camera": {
-      "nowebcameras":"There are not Web Cameras in this city to show at the current time"
+        "nowebcameras":"There are not Web Cameras in this city to show at the current time",
+        "cameras": "Take a look at the City"
     },
     "errors" : {
       "failedopenweathercall": "Error. Can not get City from Source (retry later)",
-      "noresponsefromodatabase":" Error. Can not get response from DataBase (retry later)",
+      "noresponsefromdatabase":" Error. Can not get response from DataBase (retry later)",
       "citynotfound": "Error. City not Found, check spelling"
     }
   }

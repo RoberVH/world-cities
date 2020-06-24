@@ -6,28 +6,32 @@ import React, { Suspense } from 'react'
 import { CityWeather } from '../config/types';  //,   
 import moment from 'moment';
 import { TFunction } from 'i18next';
-
-
+import Card from 'react-bootstrap/Card';
+// import ListGroup from 'react-bootstrap/ListGroup';
 
 
 export const DisplayWeatherData =(props:CityWeather, t:TFunction): JSX.Element => {
    const localTime = (props.dt);
   
   try { 
-      //console.log('Props en DisplayWeatherData', props)
     return (
       <Suspense fallback="loading">
-       <div>
-         
-          <h3>{props.name} - {props.sys.country} </h3>
-          <h3>{t("weather.userlocaltime")}: {convertUnixDate(localTime,true)}</h3>
-          <img alt='' src= {`http://openweathermap.org/img/wn/${props.weather[0].icon}.png`}></img>
-          <ul style={{listStyleType:'none'}}>
+       <Card className="mt-1" style={{ color:'black', fontSize:'0.65rem', width:'100%'}}>
+       <Card.Body> 
+          <Card.Title className="mt-1 ml-2 mb-0" style={{ fontSize:'0.95rem'}} >
+            {t("weather.weatherheader")}       
+            {`${props.name} - ${props.sys.country}`}
+
+            </Card.Title>
+   
+              <img alt='' src= {`http://openweathermap.org/img/wn/${props.weather[0].icon}.png`}></img>
               {ParseMainData(props,t)}
-          </ul>
-          
-      </div>  
-      </Suspense>
+          </Card.Body>
+          <Card.Footer>
+              {t("weather.userlocaltime")}: {convertUnixDate(localTime,true)}
+          </Card.Footer>
+       </Card>           
+       </Suspense>
       ); 
     } catch (e) {
       console.log('Error',e);
@@ -36,7 +40,8 @@ export const DisplayWeatherData =(props:CityWeather, t:TFunction): JSX.Element =
   }
   
   
-    const ParseMainData = (props: CityWeather, t:any) : JSX.Element[] => {
+  const ParseMainData = (props: CityWeather, t:any) : JSX.Element[] => {
+//      const ParseMainData = (props: CityWeather, t:any) : JSX.Element => {
       const dataPrincipal:Array<JSX.Element> =[]; 
       let i=0;
       dataPrincipal.push(<li key= {i++} >{t("weather.temp")}: {props.main.temp}° {t("weather.degrees")}</li> )
@@ -47,7 +52,6 @@ export const DisplayWeatherData =(props:CityWeather, t:TFunction): JSX.Element =
       dataPrincipal.push(<li key= {i++} >{t("weather.sunset")}: {convertUnixDate(props.sys.sunset, false)}</li> )
       dataPrincipal.push(<li key= {i++} >{t("weather.main")}: {props.weather[0].main}</li> )
       dataPrincipal.push(<li key= {i++} >{t("weather.description")}: {props.weather[0].description}</li> )
-
       return dataPrincipal;
   }
 

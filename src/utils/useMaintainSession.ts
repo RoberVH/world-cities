@@ -1,3 +1,7 @@
+/**
+ *    get/set sessionUser .- saves to browser session store the User state variable and persist it 
+ */
+
 import { User, AuthorizationProvider } from '../config/types';
 
 
@@ -6,7 +10,6 @@ const LOGGED_KEY= 'logged'
 const AUTHPROV_KEY= 'authProv'
 
 export const getSessionUser: ()=> User | undefined =  () => {
-        
       let logged:boolean;  
       let authprov;  
       const username= localStorage.getItem(USERNAME_KEY);

@@ -2,10 +2,10 @@
   {
     "main": {
         "banner": "Visitando Cidades",
-        "selectcity": "Selecione uma cidade",
         "city":"Cidade",
         "country":"País",
         "notfound": "Cidade não encontrada, verifique os dados de entrada",
+        "siginrequest":"Faça login para escolher a cidade",
         "selectcountry": "Selecionar País",
         "selectlanguage": {
           "english":"Inglês",
@@ -16,11 +16,14 @@
         }
     },
     "cityinput" : {
+      "selectcity": "Digite uma cidade",
       "lblcountry": "País",
       "lblcity":"Cidade",
-      "searchcity": "Cidade de pesquisa"
+      "searchcity": "Cidade de pesquisa",
+      "promptcityinput":"* Campo obrigatório"
     },
     "weather" : {
+        "weatherheader":"Condições climáticas atuais para ",      
         "temp" : "Temperatura",
         "feelslike" : "Parece como",
         "humidity": "Umidade",
@@ -29,7 +32,16 @@
         "userlocaltime": "Recebido (sua hora local)",
         "sunrise": "Nascer do Sol",
         "sunset": "Pôr do Sol",
-        "main": "Ccondição",
+        "main": "Condição",
         "description": "Detalhe"
+    },
+    "camera": {
+        "nowebcameras":"Não há câmeras na Web nesta cidade para mostrar no momento",
+        "cameras": "Dê uma olhada na cidade"
+    },
+    "errors" : {
+      "failedopenweathercall": "Erro. Não é possível obter a cidade da origem (tente novamente mais tarde)",
+      "noresponsefromdatabase":" Erro. Não é possível obter resposta do DataBase (tente novamente mais tarde)",
+      "citynotfound": "Erro. Cidade não encontrada, verifique a ortografia"
     }
-  }
+    }

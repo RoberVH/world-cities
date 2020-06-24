@@ -1,33 +1,41 @@
 /**
- * DespliegaCamarasWeb.js  - Get and display thumbnails of City Web Cameras
+ * DespliegaCamarasWeb.js  - Display thumbnails of City Web Cameras on state var array listaCams prop
  * 
  */
 //, {useState}
 import React from 'react'
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
 import { WebCamObjects, WebCamObject  } from '../config/types';
+import { TFunction } from 'i18next';
+import './DisplayCamarasWeb.css'; 
 
-const EXTEND_IMG_FRAME = 100;
+const EXTEND_IMG_FRAME = 100; 
 
 const DisplayFrameWebCams = (webCamItem:WebCamObject) => {
   return (
       <div key={webCamItem.id}>
-       <iframe title={webCamItem.id} src={webCamItem.player.day.embed}
-           style={{height: (webCamItem.image.sizes.preview.height+EXTEND_IMG_FRAME)+'px', width:(webCamItem.image.sizes.preview.height+EXTEND_IMG_FRAME) +'px'}}>
-        </iframe>
-        <label>{webCamItem.title}</label>
+        <Card>
+          <Card.Body>
+        <iframe title={webCamItem.id} src={webCamItem.player.day.embed}
+            style={{height: (webCamItem.image.sizes.preview.height+EXTEND_IMG_FRAME)+'px', width:(webCamItem.image.sizes.preview.height+EXTEND_IMG_FRAME) +'px'}}>
+          </iframe>
+          </Card.Body>
+          <Card.Footer>
+              {webCamItem.title}
+          </Card.Footer>
+        </Card>
       </div>
     )
   }
 
-export const DisplayWebCams =( listaCams: WebCamObjects): JSX.Element => {
-  //const [ wWebCamsFrames, setlistWebCamsFrames] = useState<displayWebCamFrames>([])
-  //const [showVideo, setShowVideo] = useState <Array<[number,string]>>([])
-    
-  console.log('En componente DisplayWebCams, long de listaCams:',listaCams.length)  
-     return (
-         <div>
-          <p>Si hay camaras</p>
+export const DisplayWebCams =( listaCams: WebCamObjects, t:TFunction): JSX.Element => {
+       return (
+         <div className="web-cameras-frame">
+           <h3> {t("camera.cameras")}</h3>
+           <CardGroup className="mt-2 justify-content-center" style={{ fontSize:'0.65rem'}}>
              { listaCams.map((item:WebCamObject) => DisplayFrameWebCams(item) )}
+          </CardGroup>
         </div>  
         );
     }

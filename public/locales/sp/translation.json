@@ -2,10 +2,10 @@
   {
     "main": {
         "banner": "Visitando Ciudades",
-        "selectcity": "Selecciona una Ciudad",
         "city":"Ciudad",
         "country":"País",
         "notfound": "No se halló la Ciudad, verifica los datos de entrada",
+        "siginrequest":"Firmarse para escoger ciudad",
         "selectcountry": "Selecciona País",
         "selectlanguage": {
           "english":"Inglés",
@@ -16,11 +16,14 @@
         }
     },
     "cityinput" : {
+      "selectcity": "Selecciona una Ciudad",
       "lblcountry": "País",
       "lblcity":"Ciudad",
-      "searchcity": "Buscar Ciudad"
+      "searchcity": "Buscar Ciudad",
+      "promptcityinput":"* Campo requerido"
     },
     "weather" : {
+      "weatherheader":"Condiciones climáticas actuales para  ",      
         "temp" : "Temperatura",
         "feelslike" : "Se siente como",
         "humidity": "Humedad",
@@ -33,6 +36,13 @@
         "description": "Detalle"
     },
     "camera": {
-      "nowebcameras":"No hay cámaras Web para mostrar en esta ciudad actualmente"
+      "nowebcameras":"No hay cámaras Web para mostrar en esta ciudad actualmente",
+      "cameras": "Mira la Ciudad"
+    },
+    "errors" : {
+      "failedopenweathercall": "Error. No puedo obtener ciudad del servidor, (reintente mas tarde)",
+      "noresponsefromdatabase":" Error. No se tiene respuesta de la Base de Datos (reintente mas tarde)",
+      "citynotfound": "Error. Ciudad no hallada, verifique deletreo"
     }
+
   }

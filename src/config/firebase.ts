@@ -1,5 +1,11 @@
 /**
- *  firebase.ts.- Configuration file for Firebase Authenticatuin and DB cloud services
+ *  firebase.ts.- Configuration file for Firebase Authentication and DB cloud services
+ *                 In this App, it's used to authenticate user through third-party service,
+ *                 Social Media authorization methods are Google, Facebook, Twitter and Github
+ *                 Other services are available, some of them can be added to this App. Go to Firebase
+ *                 to configure them as long as they are available, then add it to signInWithProv
+ *                  method in this file,  and then in LoginHolder component add
+ *                 an entry to authorization providers array
  */
 
 import firebase from "firebase/app";
@@ -10,7 +16,6 @@ import { AuthorizationProvider } from "./types";
 //const SERVICE_NAME_FIELD = 'apiname';
 
 const firebaseConfig = {
-    //apiKey: "AIzaSyBPfXx-6cp9qVIQT1o-r1QlYPRLZjVywEI",
     apiKey: process.env.REACT_APP_API_FIREBASE,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -29,11 +34,10 @@ auth.languageCode='sp'                              //Aqui cambiar el lenguaje!!
 
 export let provider: firebase.auth.AuthProvider;
 const bdFireBase= firebase.firestore();
-// const apiKeysDBCollection = bdFireBase.collection('apikeys');
-//const apikeysRef = bdFireBase.doc('apikeys/OpenWeather') 
 const apiDBCollection = bdFireBase.collection('apikeys');
+
 /**
- * getAPIKEY- Get an API Key for service (ServiceName) from Firebase Cloud Firestore DB
+ * getAPIKEY- Get an API Key for service (ServiceName) from Firebase Cloud Firestore DB 
  */
 export const getAPIKEY:(serviceName:string) => any = async(serviceName) => {
     try {
@@ -54,14 +58,11 @@ export const getAPIKEY:(serviceName:string) => any = async(serviceName) => {
         return null
     }
 }
-/**
- * db.collection("users").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-    });
-});
- */
 
+/**
+ *  signInWithProv - Create authz object, to manage third-party authz process
+ * 
+ */
 export const signInWithProv:(selectedProvider:AuthorizationProvider) => Promise<string | null> = async (selectedProvider:AuthorizationProvider) => {
     try {
         switch (selectedProvider) {
@@ -97,29 +98,15 @@ export const signInWithProv:(selectedProvider:AuthorizationProvider) => Promise<
     }
 })
 
-// export const unsubscribe= () => auth.onAuthStateChanged(userAuth => {
-//     console.log('checkAuth llamado!')
-//     if (userAuth) {
-//         console.log('Usuario:',userAuth);
-//         console.log('Usuario.DisplayName:',auth.currentUser?.displayName)
-//         return true
-
-//     } else {
-//         console.log('Debe registrarse para acceder');
-//         return false
-//     }
-// })
 
 export const SignOutUser = () :  void => {
     try {
    //if (checkAuth()) {
     if (auth.currentUser) {
             auth.signOut()   
-            console.log('desfirmado!')
         }
     } catch (error) {
-        console.log('Error en SignOut', error)
-        console.log('Mensaje de Error en SignOut', error.message)
+        console.log('SignOut Error', error)
         return 
     }
 }

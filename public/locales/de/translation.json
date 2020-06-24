@@ -2,10 +2,10 @@
   {
     "main": {
         "banner": "Städte besuchen",
-        "selectcity": "Wählen Sie eine Stadt",
         "city":"Stadt",
         "country":"Land",
         "notfound": "Stadt nicht gefunden, Eingabedaten überprüfen",
+        "siginrequest":"Melden Sie sich an, um Stadt auszuwählen",
         "selectcountry": "Land auswählen",
         "selectlanguage": {
           "english":"English",
@@ -16,20 +16,32 @@
       }
     },
     "cityinput" : {
+      "selectcity": "Wählen Sie eine Stadt",
       "lblcountry": "Land",
       "lblcity":"Stadt",
-      "searchcity": "Suche Stadt"
+      "searchcity": "Suche Stadt",
+      "promptcityinput":"* Pflichtfeld"
     },
     "weather" : {
+      "weatherheader":"Aktuelle Wetterbedingungen für ",      
         "temp" : "Temperatur",
-        "feelslike" : "Se siente como",
-        "humidity": "Humidity",
-        "pressure": "Presión",
-        "degrees": "grados",
-        "userlocaltime": "Recibido (tu hora local)",
-        "sunrise": "Salida del sol",
-        "sunset": "Puesta del Sol",
-        "main": "Zustand",
+        "feelslike" : "Es fühlt sich an wie",
+        "humidity": "Feuchtigkeit",
+        "pressure": "Luftdruck",
+        "degrees": "grad",
+        "userlocaltime": "Erhalten (Ihre Ortszeit):",
+        "sunrise": "Sonnenaufgang",
+        "sunset": "Sonnenuntergang",
+        "main": "Bedingung",
         "description": "Detail"
-    }
+    },
+    "camera": {
+      "nowebcameras":"Derzeit gibt es in dieser Stadt keine Webkameras, die angezeigt werden könnten",
+      "cameras": "Schauen Sie sich die Stadt an"
+  },
+  "errors" : {
+    "failedopenweathercall": "Error. Stadt kann nicht von der Quelle abgerufen werden (später erneut versuchen)",
+    "noresponsefromdatabase":" Error. Antwort von DataBase kann nicht empfangen werden (später erneut versuchen)",
+    "citynotfound": "Error. Stadt nicht gefunden, Rechtschreibung überprüfen"
+  }    
   }
