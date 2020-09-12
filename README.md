@@ -13,5 +13,5 @@ It requires to Sign In through a third-party method. The  user can click on one 
 No custom server App is intended to be developed and used with this App, It doesn't use a  backend server.
 It uses Firebase to access third-partu authorization
 
-* No data other than email is store at FireBase
+No data other than email is store at FireBase
  
